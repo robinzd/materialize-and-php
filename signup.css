@@ -1,0 +1,25 @@
+body{
+    background:url(road1.jpeg);
+    background-size:cover;
+    background-position: center;
+    min-height:1000px;
+}
+
+@media screen and (max-width:670px){
+    body{
+        min-height:500px;
+    }
+}
+
+
+div.col.s12.l4.offset-l4{
+    margin-top: 200px;
+   
+}
+
+div.card {
+    background: rgba(132, 134, 134, 0.438)
+}
+
+
+

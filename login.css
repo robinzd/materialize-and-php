@@ -1,0 +1,29 @@
+body{
+    background:url(login1.jpeg);
+    background-size:cover;
+    background-position: center;
+    min-height:1000px;
+}
+
+@media screen and (max-width:670px){
+    body{
+        min-height:500px;
+    }
+}
+
+div.col.s12.l4.offset-l4{
+    margin-top: 200px;
+    /* background-color: rgba(8, 112, 65, 0.39) !important;
+    opacity:80% !important; */
+   
+}
+
+div.card {
+    background: rgba(71, 143, 143, 0.479);
+   
+
+}
+
+
+
+

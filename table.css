@@ -1,0 +1,34 @@
+a.right.align.waves-effect.waves_light.btn.modal-trigger{
+    margin-top: 10px;
+}
+
+
+div.col.s12{
+    width:60%;
+    margin-left: 20%;
+    margin-top: 50px;
+}
+
+table,th,td{
+    border:1px solid black;
+    background: rgba(150, 228, 224, 0.836);
+}
+
+a.waves-effect.waves-light.btn.modal-trigger.Button1{
+    margin-left: 45%;
+    margin-top: 30px;
+}
+
+body{
+    background:url(service2.jpg);
+    background-size:cover;
+    background-position: center;
+    min-height:1000px;
+}
+
+@media screen and (max-width:670px){
+    body{
+        min-height:500px;
+    }
+}
+
