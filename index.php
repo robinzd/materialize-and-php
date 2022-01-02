@@ -68,7 +68,8 @@ session_start();
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <title>login page</title>
+    <title>Login Page</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>

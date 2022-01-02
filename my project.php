@@ -40,7 +40,8 @@ function getInitialsAttribute($user_data)
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link rel="stylesheet" href="my project.css">
-  <title>my project</title>
+  <title>Njoy Life</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
@@ -86,9 +87,9 @@ function getInitialsAttribute($user_data)
 
 
         <ul class="sidenav teal accent-4" id="mobile-menu">
-          <li><a href="#">Photos</a></li>
-          <li><a href="#">Contacts</a></li>
-          <li><a href="#">Services</a></li>
+          <li><a href="#photos">Photos</a></li>
+          <li><a href="#contacts">Contacts</a></li>
+          <li><a href="#services">Services</a></li>
           <li><a href="table.php">Manage Services</a></li>
           <li><a href="logout.php">Logout</a></li>
           

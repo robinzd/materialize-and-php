@@ -60,7 +60,8 @@ session_start();
     <link rel="stylesheet" type="text/css" href="signup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     
-    <title>Sign up</title>
+    <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>

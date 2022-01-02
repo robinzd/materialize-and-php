@@ -9,6 +9,7 @@ include 'backend/database.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Services Data</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,10 +29,10 @@ include 'backend/database.php';
                     <div class="col-xs-2 col-md-1">
                         <a href="my project.php"><i class="material-icons home">home</i></a>
                     </div>
-                    <div class="col-xs-5 col-md-5">
+                    <div class="col-xs-10 col-md-5">
                         <h2>Manage <b>Services</b></h2>
                     </div>
-                    <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-8 col-md-6">
                         <a href="#addServiceModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
                         <a href="JavaScript:void(0);" class="btn btn-danger" id="delete_multiple"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
                     </div>
@@ -200,11 +201,13 @@ include 'backend/database.php';
         </div>
     </div>
 
+    <footer class="page-footer">
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">&copy;2019 Njoy Life</div>
+        </div>
+    </footer>
+
 </body>
-<footer class="page-footer">
-    <div class="footer-copyright grey darken-4">
-        <div class="container center-align">&copy;2019 Njoy Life</div>
-    </div>
-</footer>
+
 
 </html>
