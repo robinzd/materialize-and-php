@@ -87,7 +87,7 @@ function getInitialsAttribute($user_data)
 
 
         <ul class="sidenav teal accent-4" id="mobile-menu">
-          <li><p>welcome,<a href="#" data-initials="<?php echo $initial; ?>"></a></p></li>
+          <li><a href="#" data-initials="<?php echo $initial; ?>">Welcome</a></li>
           <li><a href="#photos">Photos</a></li>
           <li><a href="#contacts">Contacts</a></li>
           <li><a href="#services">Services</a></li>
