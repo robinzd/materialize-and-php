@@ -25,7 +25,7 @@ session_start();
 
             $check=mysqli_query($con, $query);
           
-            header("location: login.php");
+            header("location: index.php");
             die;
         
         }else
@@ -98,7 +98,7 @@ session_start();
     
                            <div class="input-field">
                                <ul>
-                                   <li class="center black-text">Already Have An Account?<a href="login.php" class="center red-text">Login</a></li>
+                                   <li class="center black-text">Already Have An Account?<a href="index.php" class="center red-text">Login</a></li>
                                </ul>
                            </div><br>
                           
