@@ -26,6 +26,10 @@ body{
     min-height:1000px;
 }
 
+a.waves-effect.waves-light.btn.modal-trigger{
+    margin-left:20px;
+}
+
 @media screen and (max-width:670px){
     body{
         min-height:500px;

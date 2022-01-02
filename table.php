@@ -1,172 +1,203 @@
 <?php
-include("connection.php");
-include("function.php");
-
-if($_SERVER['REQUEST_METHOD'] == "POST")
-       {
-        // something was posted
-        
-        $service =$_POST["service"];
-        $price =$_POST["price"];
-        $contact_person =$_POST["contact_person"];
-        $contact_no =$_POST["contact_no"];
-        $dates_available =$_POST["dates_available"];
-       
-        if(!empty($service) && !is_numeric($service) && !empty($price) && is_numeric($price)
-        && !empty($contact_person) && !is_numeric($contact_person) && !empty($contact_no) && is_numeric($contact_no)
-        && !empty($dates_available))
-        {
-            // save to database
-         
-            $query = "INSERT INTO `service`( `service`, `price`, `contact_person`, `contact_no`, `dates_available`) VALUES ('$service','$price','$contact_person','$contact_no','$dates_available')";
-          
-
-            $check=mysqli_query($con, $query);
-          
-            header("location: table.php");
-            die;
-        
-        }else
-        {
-            echo "please enter some valid information!";
-        }
-
-
-       }
-
+include 'backend/database.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="table.css">
-    <title>Service Table</title>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Services Data</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/table.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="ajax/ajax.js"></script>
 </head>
 
 <body>
-    <!-- Modal Trigger -->
-    <h1 class="center">Services Available</h1>
+    <div class="container">
+        <p id="success"></p>
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-1">
+                    <a href="my project.php" ><i class="material-icons home">home</i></a>
+                    </div>
+                    <div class="col-sm-5">
+                        <h2>Manage <b>Services</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addServiceModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
+                        <a href="JavaScript:void(0);" class="btn btn-danger" id="delete_multiple"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="selectAll">
+                                <label for="selectAll"></label>
+                            </span>
+                        </th>
+                        <th>S.NO</th>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Contact Person</th>
+                        <th>Contact No</th>
+                        <th>Dates Available</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4 class="center">Add Services</h4>
-            <form method="post">
-               
-                <div class="input-field">
+                    <?php
+                    $result = mysqli_query($conn, "SELECT * FROM service");
+                    $i = 1;
+                    while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                        <tr id="<?php echo $row["sno"]; ?>">
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" class="user_checkbox" data-user-sno="<?php echo $row["sno"]; ?>">
+                                    <label for="checkbox2"></label>
+                                </span>
+                            </td>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row["service"]; ?></td>
+                            <td><?php echo $row["price"]; ?></td>
+                            <td><?php echo $row["contact_person"]; ?></td>
+                            <td><?php echo $row["contact_no"]; ?></td>
+                            <td><?php echo $row["dates_available"]; ?></td>
+                            <td>
+                                <a href="#editServiceModal" class="edit" data-toggle="modal">
+                                    <i class="material-icons update" data-toggle="tooltip" data-sno="<?php echo $row["sno"]; ?>" data-service="<?php echo $row["service"]; ?>" data-price="<?php echo $row["price"]; ?>" data-person="<?php echo $row["contact_person"]; ?>" data-number="<?php echo $row["contact_no"]; ?>" data-dates="<?php echo $row["dates_available"]; ?>" title="Edit">&#xE254;</i>
+                                </a>
+                                <a href="#deleteServiceModal" class="delete" data-sno="<?php echo $row["sno"]; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    <?php
+                        $i++;
+                    }
+                    ?>
+                </tbody>
+            </table>
 
-                    <input type="text" name="service">
-                    <label for="service">Service Want From Us</label>
-                </div>
-                <div class="input-field">
-
-                    <input type="number" name="price">
-                    <label for="number">Your Estimated Price</label>
-                </div>
-                <div class="input-field">
-
-                    <input type="text" name="contact_person">
-                    <label for="contact person">Contact Person</label>
-                </div>
-                <div class="input-field">
-
-                    <input type="number" name="contact_no">
-                    <label for="contact no">Your Contact No</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" class="datepicker" name="dates_available">
-                    <label for="date">Choose A Date Of Your Journey</label>
-                </div>
-                <div class="input-field center">
-                <button type="submit" value="add"  class="btn waves-effect waves-dark">Add Service</button>
-                </div>
-            </form>
         </div>
-
-
-
     </div>
-    <div id="modal2" class="modal">
-    <h4 class="center">Edit Person</h4>
+    <!-- Add Modal HTML -->
+    <div id="addServiceModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="user_form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Service</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div class="form-group"> -->
+
+                        <div class="form-group">
+                            <label>Service</label>
+                            <input type="text" id="service" name="service" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" id="price" name="price" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Person</label>
+                            <input type="text" id="contactperson" name="contactperson" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact No</label>
+                            <input type="number" id="contactnumber" name="contactnumber" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dates Available</label>
+                            <input type="date" id="dates" name="dates" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" value="1" name="type">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button type="button" class="btn btn-success" id="btn-add">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div>
-        
+    <div id="editServiceModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="update_form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Service</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="sno_u" name="sno" class="form-control" required>
+                        <div class="form-group">
+                            <label>Service</label>
+                            <input type="text" id="service_u" name="service" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" id="price_u" name="price" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Person</label>
+                            <input type="text" id="contactperson_u" name="contactperson" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact No</label>
+                            <input type="number" id="contactnumber_u" name="contactnumber" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dates Available</label>
+                            <input type="date" id="dates_u" name="dates" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" value="2" name="type">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button type="button" class="btn btn-info" id="update">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal HTML -->
+    <div id="deleteServiceModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Service</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="sno_d" name="sno" class="form-control">
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button type="button" class="btn btn-danger" id="delete">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <?php
-
-    $result = mysqli_query($con, "SELECT * FROM service;");
-
-
-    echo "<div class='col s12'><table class='responsive-table'>    
-
-<tr>
-<th>S.No</th>
-<th>Service</th>
-<th>Price</th>
-<th>Contact Person</th>
-<th>Contact No</th>
-<th>Dates Available</th>
-<th>Options</th>
-</tr>";
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr onclick='#modal2'>";
-        echo "<td>" . $row['sno'] . "</td>";
-        echo "<td>" . $row['service'] . "</td>";
-        echo "<td>" . $row['price'] . "</td>";
-        echo "<td>" . $row['contact_person'] . "</td>";
-        echo "<td>" . $row['contact_no'] . "</td>";
-        echo "<td>" . $row['dates_available'] . "</td>";
-        echo"<td style='width: 140px;'>"."<a class='waves-effect waves-light btn modal-trigger' href='#modal2'>Edit Service</a>"."</td>";
-        echo "</tr>";
-    }
-
-    echo "</table></div>";
-
-
-    mysqli_close($con);
-
-
-    ?>
-
-
-
-
-    <a class="waves-effect waves-light btn modal-trigger Button1" href="#modal1">Add Services</a>
-    <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Edit Person</a> -->
-
-
-
-
-
-
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.modal').modal();
-            $('.datepicker').datepicker({
-                  format:'yyyy-mm-dd'
-            });
-
-        });
-    </script>
 </body>
 
 </html>

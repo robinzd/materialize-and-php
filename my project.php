@@ -79,7 +79,7 @@ $initial=getInitialsAttribute($user_data);
         <a  href="#" data-initials="<?php echo $initial;?>" class="right hide-on-med-and-down dropdown-trigger" data-target="dropdown1" ></a>
 
         <ul id="dropdown1" class="dropdown-content">
-          <li> <a href="#!"> Service Details</a></li>
+          <li> <a href="table.php"> Service Details</a></li>
         <li><a href="logout.php"><i class="small material-icons">logout</i>Logout</a></li>
         </ul>
 
