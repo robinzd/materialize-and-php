@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -10,42 +9,22 @@ include("function.php");
 $user_data = check_login($con);
 
 
-$initial=getInitialsAttribute($user_data);
+$initial = getInitialsAttribute($user_data);
 
 
- function getInitialsAttribute($user_data) {
+function getInitialsAttribute($user_data)
+{
   $nameWords = explode(" ", $user_data['user_name']);
   $initials =  $nameWords[0][0];
-  if(count($nameWords) > 1) {
-      $initials = $initials . $nameWords[1][0];
+  if (count($nameWords) > 1) {
+    $initials = $initials . $nameWords[1][0];
   }
   return $initials;
 }
 
-  
+
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <html lang="en">
@@ -55,8 +34,7 @@ $initial=getInitialsAttribute($user_data);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
@@ -73,14 +51,14 @@ $initial=getInitialsAttribute($user_data);
       <div class="container">
         <a href="" class="brand-logo">Njoy Life</a>
         <a href="" class="sidenav-trigger" data-target="mobile-menu">
-        <i class="material-icons">menu</i>
+          <i class="material-icons">menu</i>
         </a>
-       
-        <a  href="#" data-initials="<?php echo $initial;?>" class="right hide-on-med-and-down dropdown-trigger" data-target="dropdown1" ></a>
+
+        <a href="#" data-initials="<?php echo $initial; ?>" class="right hide-on-med-and-down dropdown-trigger" data-target="dropdown1"></a>
 
         <ul id="dropdown1" class="dropdown-content">
           <li> <a href="table.php"> Service Details</a></li>
-        <li><a href="logout.php"><i class="small material-icons">logout</i>Logout</a></li>
+          <li><a href="logout.php"><i class="small material-icons">logout</i>Logout</a></li>
         </ul>
 
 
@@ -100,10 +78,10 @@ $initial=getInitialsAttribute($user_data);
           <li><a href="#" class=" tooltipped btn-floating btn-small transparent" data-tooltip="Telegram">
               <i class="fab fa-telegram light-blue-text"></i>
             </a></li>
-            <li>Welcome</li>
-         </ul>
-      
-         
+          <li>Welcome</li>
+        </ul>
+
+
 
 
 
@@ -112,17 +90,17 @@ $initial=getInitialsAttribute($user_data);
           <li><a href="#">Contacts</a></li>
           <li><a href="#">services</a></li>
           <li><a href="#">Logout</a></li>
-          
+
         </ul>
 
       </div>
 
     </nav>
 
-   
 
-    
-    
+
+
+
 
   </header>
 
@@ -305,7 +283,7 @@ $initial=getInitialsAttribute($user_data);
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('.sidenav').sidenav();
       $('.materialboxed').materialbox();
       $('.parallax').parallax();
@@ -315,7 +293,9 @@ $initial=getInitialsAttribute($user_data);
       });
       $('.tooltipped').tooltip();
       $('.scrollspy').scrollSpy();
-      $('.dropdown-trigger').dropdown({coverTrigger:false});
+      $('.dropdown-trigger').dropdown({
+        coverTrigger: false
+      });
     });
   </script>
 </body>
