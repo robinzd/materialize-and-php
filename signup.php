@@ -79,7 +79,7 @@ session_start();
                             <div class="input-field">
                                 <i class="fas fa-mobile-alt prefix"></i>
                                 <label for="moble no" class="black-text">Mobile No</label>
-                                <input type="text" name="mobile_no" class="black-text">
+                                <input type="number" name="mobile_no" class="black-text">
                             </div>
                             <div class="input-field">
                                 <i class="material-icons prefix">email</i>

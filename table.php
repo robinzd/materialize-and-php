@@ -25,69 +25,71 @@ include 'backend/database.php';
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-1">
-                    <a href="my project.php" ><i class="material-icons home">home</i></a>
+                    <div class="col-xs-2 col-md-1">
+                        <a href="my project.php"><i class="material-icons home">home</i></a>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-xs-5 col-md-5">
                         <h2>Manage <b>Services</b></h2>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6 col-md-6">
                         <a href="#addServiceModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
                         <a href="JavaScript:void(0);" class="btn btn-danger" id="delete_multiple"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
                     </div>
                 </div>
             </div>
-            <table class="table table-responsive table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
-                        <th>S.NO</th>
-                        <th>Service</th>
-                        <th>Price</th>
-                        <th>Contact Person</th>
-                        <th>Contact No</th>
-                        <th>Dates Available</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-                    $result = mysqli_query($conn, "SELECT * FROM service");
-                    $i = 1;
-                    while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                        <tr id="<?php echo $row["sno"]; ?>">
-                            <td>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
                                 <span class="custom-checkbox">
-                                    <input type="checkbox" class="user_checkbox" data-user-sno="<?php echo $row["sno"]; ?>">
-                                    <label for="checkbox2"></label>
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
                                 </span>
-                            </td>
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo $row["service"]; ?></td>
-                            <td><?php echo $row["price"]; ?></td>
-                            <td><?php echo $row["contact_person"]; ?></td>
-                            <td><?php echo $row["contact_no"]; ?></td>
-                            <td><?php echo $row["dates_available"]; ?></td>
-                            <td>
-                                <a href="#editServiceModal" class="edit" data-toggle="modal">
-                                    <i class="material-icons update" data-toggle="tooltip" data-sno="<?php echo $row["sno"]; ?>" data-service="<?php echo $row["service"]; ?>" data-price="<?php echo $row["price"]; ?>" data-person="<?php echo $row["contact_person"]; ?>" data-number="<?php echo $row["contact_no"]; ?>" data-dates="<?php echo $row["dates_available"]; ?>" title="Edit">&#xE254;</i>
-                                </a>
-                                <a href="#deleteServiceModal" class="delete" data-sno="<?php echo $row["sno"]; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
+                            </th>
+                            <th>S.NO</th>
+                            <th>Service</th>
+                            <th>Price</th>
+                            <th>Contact Person</th>
+                            <th>Contact No</th>
+                            <th>Dates Available</th>
+                            <th>ACTION</th>
                         </tr>
-                    <?php
-                        $i++;
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $result = mysqli_query($conn, "SELECT * FROM service");
+                        $i = 1;
+                        while ($row = mysqli_fetch_array($result)) {
+                        ?>
+                            <tr id="<?php echo $row["sno"]; ?>">
+                                <td>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" class="user_checkbox" data-user-sno="<?php echo $row["sno"]; ?>">
+                                        <label for="checkbox2"></label>
+                                    </span>
+                                </td>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $row["service"]; ?></td>
+                                <td><?php echo $row["price"]; ?></td>
+                                <td><?php echo $row["contact_person"]; ?></td>
+                                <td><?php echo $row["contact_no"]; ?></td>
+                                <td><?php echo $row["dates_available"]; ?></td>
+                                <td>
+                                    <a href="#editServiceModal" class="edit" data-toggle="modal">
+                                        <i class="material-icons update" data-toggle="tooltip" data-sno="<?php echo $row["sno"]; ?>" data-service="<?php echo $row["service"]; ?>" data-price="<?php echo $row["price"]; ?>" data-person="<?php echo $row["contact_person"]; ?>" data-number="<?php echo $row["contact_no"]; ?>" data-dates="<?php echo $row["dates_available"]; ?>" title="Edit">&#xE254;</i>
+                                    </a>
+                                    <a href="#deleteServiceModal" class="delete" data-sno="<?php echo $row["sno"]; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                            </tr>
+                        <?php
+                            $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
@@ -199,5 +201,10 @@ include 'backend/database.php';
     </div>
 
 </body>
+<footer class="page-footer">
+    <div class="footer-copyright grey darken-4">
+        <div class="container center-align">&copy;2019 Njoy Life</div>
+    </div>
+</footer>
 
 </html>
