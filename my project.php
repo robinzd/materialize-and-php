@@ -88,8 +88,10 @@ function getInitialsAttribute($user_data)
         <ul class="sidenav teal accent-4" id="mobile-menu">
           <li><a href="#">Photos</a></li>
           <li><a href="#">Contacts</a></li>
-          <li><a href="#">services</a></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="table.php">Manage Services</a></li>
+          <li><a href="logout.php">Logout</a></li>
+          
 
         </ul>
 
